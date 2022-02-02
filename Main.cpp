@@ -123,7 +123,7 @@ void drawDefaultText(TestInfo& testInfo)
     }
 }
 
-int main2()
+int main()
 {
     int seed = 13374201337;
 
@@ -164,6 +164,23 @@ int main2()
     }
 
     sf::Clock timer;
+
+    ///////////////////////////////
+    // Batched sprite test
+    ///////////////////////////////
+
+    window.clear(sf::Color::Black);
+
+    srand(seed);
+    timer.restart();
+
+    drawBatchedSprites(testInfo);
+    window.display();
+
+    auto spritetime_batched = timer.restart().asMilliseconds();
+    file << "Batched sprite draw finished in " << spritetime_batched << " milliseconds" << std::endl;
+
+    sf::sleep(sf::seconds(6));
 
     ///////////////////////////////
     // Non-batched sprite test (regular draws)
